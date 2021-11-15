@@ -1,0 +1,21 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EMAIL CONFIRM SUCCESS</title>
+</head>
+
+<body>
+    <center>
+        <h1>{{message}}</h1>
+        <form action="/confirm-email" method="POST">
+            <input type="text" minlength="4" name="OTP" />
+            <input type="text" value="{{StuID}}" name="ID" style="display: none;"/>
+            <button type="submit">CHECK</button>
+        </form>
+
+        <a href="/login">Click here to sign in to your account!</a>
+    </center>
+</body>
+
+</html>

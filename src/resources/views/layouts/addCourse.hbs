@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>E Store - eCommerce HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="eCommerce HTML Template Free Download" name="keywords">
+    <meta content="eCommerce HTML Template Free Download" name="description">
+
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/lib/slick/slick.css" rel="stylesheet">
+    <link href="/lib/slick/slick-theme.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/css/fileinput.min.css">
+    <!--===============================================================================================-->
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/login/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/login/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/login/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/login/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/login/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/login/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/login/css/util.css">
+    <link rel="stylesheet" type="text/css" href="/login/css/main.css">
+    <!--===============================================================================================-->
+    <style>
+.btn-file  {
+    color: #FF6F61;
+    background: #ffffff;
+    border: 1px solid #FF6F61;
+}
+.login100-form-btn {
+    background: #FF6F61;
+}
+
+.btn:hover, .btn:active, .btn-file:focus {
+    color: #ffffff;
+    background: #FF6F61;
+    box-shadow: none;
+}
+</style>
+    <script src="https://cdn.tiny.cloud/1/kaozrk7baxqmz687gdl50m3ymekd4behuweni1bz7m1clu2s/tinymce/5/tinymce.min.js"
+            referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+            toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+            toolbar_mode: 'floating',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+        });
+    </script>
+
+</head>
+
+
+</head>
+
+<body>
+    {{>Header}}
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form flex-sb flex-w" method="POST" action="/teacher/add-course">
+                    <span class="login100-form-title p-b-53">
+                        Add new course
+                    </span>
+
+                    <div class="p-t-31 p-b-9">
+                        <span class="txt1">
+                            Course name
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Username is required">
+                        <input class="input100" type="text" name="name" required>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="p-t-31 p-b-9">
+                        <span class="txt1">
+                            Course picture (URL)
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Username is required">
+                        <input class="input100" type="url" name="avatar" required>
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="p-t-31 p-b-9">
+                        <span class="txt1">
+                            Brief description
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Username is required">
+                        <input class="input100" type="text" name="brief_des" required>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="p-t-31 p-b-9">
+                        <span class="txt1">
+                            Full Description
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Username is required">
+                        <textarea id="mytextarea" name="full_des"></textarea>
+                        <span class="focus-input100"></span>
+                    </div>
+                        
+
+                    <div class="p-t-31 p-b-9">
+                        <span class="txt1">
+                            Category
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100" style="background-color: inherit; border:0px;">
+                        <select id="category" name="category" class="custom-select custom-select-lg mb-3">
+                            {{#each cate}}
+                            <option value={{this._id}}>{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="p-t-31 p-b-9">
+                        <span class="txt1">
+                            Price
+                        </span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Price is required">
+                        <input class="input100" type="number" min="0" name="price" required>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div>
+                        {{#if success_message}}
+                        <div>
+                            <p style="color: green;">{{success_message}}</p>
+                        </div>
+                        {{/if}}
+                        {{#if fail_message}}
+                        <div>
+                            <p style="color: red;">{{fail_message}}</p>
+                        </div>
+                        {{/if}}
+                    </div>
+
+                    <div class="container-login100-form-btn m-t-17">
+                        <button class="login100-form-btn" type="submit"> 
+                            Add course
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+
+    {{>Footer}}
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/easing/easing.min.js"></script>
+    <script src="/lib/slick/slick.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/js/fileinput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/themes/fa/theme.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/js/locales/vi.min.js"></script>
+    <script>
+        $('#fuMain').fileinput({
+            theme: 'fa',
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            dropZoneEnabled: false,
+            'showUpload': false
+        });
+    </script>
+    <!-- Template Javascript -->
+    <script src="/js/main.js"></script>
+
+
+    <!--===============================================================================================-->
+    <script src="/login/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/login/vendor/animsition/js/animsition.min.js"></script>
+    <!--&lt;!&ndash;===============================================================================================&ndash;&gt;-->
+    <script src="/login/vendor/bootstrap/js/popper.js"></script>
+    <script src="/login/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--&lt;!&ndash;===============================================================================================&ndash;&gt;-->
+    <script src="/login/vendor/select2/select2.min.js"></script>
+    <!--&lt;!&ndash;===============================================================================================&ndash;&gt;-->
+    <script src="/login/vendor//daterangepicker/moment.min.js"></script>
+    <script src="/login/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--&lt;!&ndash;===============================================================================================&ndash;&gt;-->
+    <script src="/login/vendor/countdowntime/countdowntime.js"></script>
+    <!--==========/=====================================================================================-->
+    <script src="/login/js/main.js"></script>
+
+
+</body>
+
+</html>

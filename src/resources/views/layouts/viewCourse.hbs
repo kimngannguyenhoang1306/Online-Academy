@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>E Store - eCommerce HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="eCommerce HTML Template Free Download" name="keywords">
+    <meta content="eCommerce HTML Template Free Download" name="description">
+
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/lib/slick/slick.css" rel="stylesheet">
+    <link href="/lib/slick/slick-theme.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+{{>Header}}
+    
+
+
+<!-- Modal -->
+<div class="modal fade" id="renderVideoModal" tabindex="-1" role="dialog" aria-labelledby="renderVideoModalTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-vid">
+            <div class="modal-header">
+                <h3 class="modal-title vid-header">Course : {{course.name}}</h3>
+                <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="width: 100%;" class="vid-container">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/8RYslufQHlg"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                </div>
+                <div class="mt-3">
+                    <div class="ls-vid-header"> List of videos :</div>
+                    {{#each chapters as |chapter ind|}}
+                        <div class="mt-3">
+                            <strong><a href="#" class="session session-vid" data-toggle="collapse"
+                                       data-target="#chapter_vid{{inc @index}}" aria-expanded="false"
+                                       aria-controls="collapseExample">Session {{inc
+                                    @index}}:
+                                <span>{{chapter.name}}</span></a></strong>
+
+                            <div class="collapse" id="chapter_vid{{inc @index}}">
+                                <!-- Add videos -->
+
+                                {{#with (arrayof ../videolist @index)}}
+                                    {{#each this.videos}}
+                                        <div class="ml-3 mb-2 vid-div">
+                                            <a class="vid-btn ml-3" type="button" data-url="{{this.url}}"
+                                               onclick="changeVid('{{this.url}}')">{{this.name}}</a>
+
+                                        </div>
+                                    {{/each}}
+                                {{/with}}
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addSessionModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form id="addSessionForm" method="POST" action="">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add new session</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="sessionName">Session name</label>
+                        <input type="text" class="form-control" id="sessionNameInput" name="sessionNameInput"
+                               placeholder="Enter session's name" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-success" name="action" value="add_session" type="submit"><i
+                            class="fa fa-check" aria-hidden="true"></i>
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-danger"
+                                                                                         aria-hidden="true"></i>Close
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addVideoModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form id="addVideoForm" method="POST" action="">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add new video</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <h3 style="text-align: center;">Session : <span id="sessionHeader"></span></h3>
+                        <input type="text" class="form-control" id="ChapterIdInput" name="ChapterIdInput" value=""
+                               style="display:none" required>
+                        <label for="VideoName">Video name</label>
+                        <input type="text" class="form-control" id="VideoNameInput" name="VideoNameInput"
+                               placeholder="Enter video's name" required>
+                        <label for="url">Enter an video url</label>
+
+                        <input type="url" class="form-control" name="url" id="url"
+                               placeholder="https://youtube.com/embed/..." pattern="https://.*" size="30" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-success" name="action" value="add_video" type="submit"><i
+                            class="fa fa-check" aria-hidden="true"></i>
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-danger"
+                                                                                         aria-hidden="true"></i>Close
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changeSessionNameModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form id="changeSessionNameForm" method="POST" action="">
+                <div class="modal-header">
+                    <h5 class="modal-title">Change session's name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="ChapterIdInput2" name="ChapterIdInput2" value=""
+                               style="display:none" required>
+                        <label for="SessionName">Session name</label>
+                        <input type="text" class="form-control" id="changeSessionNameInput"
+                               name="changeSessionNameInput" placeholder="Enter session's name" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-success" name="action" value="change_session_name"
+                            type="submit"><i class="fa fa-check" aria-hidden="true"></i>
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-danger"
+                                                                                         aria-hidden="true"></i>Close
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="rmSessionModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form id="rmSessionForm" method="POST" action="">
+                <div class="modal-header">
+                    <h5 class="modal-title">Remove session dialog</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <h4>Confirm to remove this session permanently.</h4>
+                        <input type="text" class="form-control" id="rmSessionIdInput" name="sessionIdInput"
+                               style="display:none" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-success" name="action" value="remove_session" type="submit"><i
+                            class="fa fa-check" aria-hidden="true"></i>
+                        Yes
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-danger"
+                                                                                         aria-hidden="true"></i>No
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changeVideoNameModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form id="changeVideoNameForm" method="POST" action="">
+                <div class="modal-header">
+                    <h5 class="modal-title">Change video's name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="VideoIdInput" name="VideoIdInput" value=""
+                               style="display:none" required>
+                        <label for="VideoName">Video name</label>
+                        <input type="text" class="form-control" id="changeVideoNameInput"
+                               name="changeVideoNameInput" placeholder="Enter video's name" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-success" name="action" value="change_video_name" type="submit"><i
+                            class="fa fa-check" aria-hidden="true"></i>
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-danger"
+                                                                                         aria-hidden="true"></i>Close
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="rmVideoModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form id="rmVideoForm" method="POST" action="">
+                <div class="modal-header">
+                    <h5 class="modal-title">Remove video dialog</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <h4>Confirm to remove this video permanently.</h4>
+                        <input type="text" class="form-control" id="rmVideoIdInput" name="VideoIdInput"
+                               style="display:none" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-success" name="action" value="remove_video" type="submit"><i
+                            class="fa fa-check" aria-hidden="true"></i>
+                        Yes
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-danger"
+                                                                                         aria-hidden="true"></i>No
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Modal End  -->
+
+<!-- Product Detail Start -->
+<div class="product-detail">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="product-detail-top">
+                    <div class="row align-items-center">
+                        <div class="col-md-5">
+                            <div class="product-slider-single normal-slider">
+                                <img src="{{course.avatar}}" alt="Image"/>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="product-content">
+                                <div id="content">
+                                    <div class="title">
+                                        <h2 id="courseName">{{course.name}}</h2>
+                                    </div>
+
+                                    <p id="briefDescription">{{course.brief_description}}</p>
+                                    <div class="price">
+                                        <h4>Price :</h4>
+                                        <p>$</p>
+                                        <p id="price"> {{course.price}} </p>
+                                    </div>
+                                    <div class="status">
+                                        <h4>Status :</h4>
+                                        {{#if course.completed}}
+                                            <p id="status"> Completed </p>
+                                        {{else}}
+                                            <p id="status"> Incompleted </p>
+                                        {{/if}}
+                                    </div>
+                                    <div class="">
+                                        <button class="btn btn-edit-detail">
+                                            <i class="fas fa-edit mr-2"></i>Edit
+                                        </button>
+                                    </div>
+                                </div>
+                                <form id="coursedetail" style="display: none;" method="POST" action="">
+                                    <div class="form-group">
+                                        <label for="coursename">Image (URL)</label>
+                                        <input type="url" class="form-control" id="avatarInput" name="avatarInput"
+                                               aria-describedby="emailHelp" placeholder="Enter image URL">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="coursename">Course name</label>
+                                        <input type="text" class="form-control" id="courseNameInput"
+                                               name="courseNameInput" aria-describedby="emailHelp"
+                                               placeholder="Enter course title" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="briefDescription">Brief description</label>
+                                        <input type="text" class="form-control" id="briefDescriptionInput"
+                                               name="briefDescriptionInput" placeholder="Enter brief description"
+                                               required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="price">Price</label>
+                                        <input type="number" min="0" class="form-control" id="priceInput"
+                                               name="priceInput" placeholder="Enter course price" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status">Status</label>
+                                        <select class="form-control" id="statusInput" name="statusInput">
+                                            <option value="Completed">Completed</option>
+                                            <option value="Incompleted">Incompleted</option>
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-outline-success" id="saveDetailBtn" name="action"
+                                            value="course_detail" type="submit">
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                        Save
+                                    </button>
+                                    <button class="btn btn-danger" id="detailCancelBtn" type="button">
+                                        <i class="fa fa-danger" aria-hidden="true"></i>
+                                        Cancel
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product">
+                    <div class="section-header">
+                        <h1>Course Description</h1>
+                    </div>
+                    <div class="row product-detail-bottom">
+                        <div class="col-lg-12">
+
+                            <div class="tab-content">
+                                <div id="description" class="container tab-pane active">
+                                    <div class="desc-container">
+                                        {{{course.full_description}}}
+                                    </div>
+                                    <div class="editor" style="display: none;">
+                                        <form method="POST" action="" name="desc" style="width: 100%;">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4>WYSIWYG Editor</h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="txtDesc">Course Description</label>
+                                                        <textarea id="txtDesc" name="desc" autofocus cols="40"
+                                                                  rows="50"
+                                                                  class="form-control">{{course.full_description}}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <button class="btn btn-outline-success" name="action"
+                                                            value="course_description" type="Submit">
+                                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                                        Save
+                                                    </button>
+                                                    <button class="btn btn-danger" id="cancelDescBtn" type="button">
+                                                        <i class="fa fa-danger" aria-hidden="true"></i>
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="">
+                                        <button class="btn btn-edit-desc">
+                                            <i class="fas fa-edit mr-2"></i>Edit
+                                        </button>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="section-header">
+                        <h1>Course Detail</h1>
+                    </div>
+
+
+                    <div class="row product-detail-bottom">
+                        <div class="col-lg-12 sidebar">
+                            <div class="sidebar-widget brands" style="overflow: hidden;">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                        <tr>
+                                            <th>Session</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="align-middle">
+                                        <!-- Add chapters -->
+                                        {{#each chapters as |chapter ind|}}
+                                            <tr>
+                                                <td>
+                                                    <div>
+
+                                                        <h4><a href="#" class="session" data-toggle="collapse"
+                                                               data-target="#chapter_{{inc @index}}"
+                                                               aria-expanded="false"
+                                                               aria-controls="collapseExample">Session {{inc
+                                                                @index}}:
+                                                            <span>{{chapter.name}}</span></a></h4>
+
+                                                        <div class="collapse" id="chapter_{{inc @index}}">
+                                                            <!-- Add videos -->
+
+                                                            {{#with (arrayof ../videolist @index)}}
+                                                                {{#each this.videos}}
+                                                                    <div class="mb-2">
+                                                                        <button type="button" class="btn btn-primary"
+                                                                                data-toggle="modal"
+                                                                                data-target="#renderVideoModal"
+                                                                                data-whatever="{{this.url}}">{{this.name}}</button>
+                                                                        <button class="rbtn" type="button"
+                                                                                data-toggle="modal"
+                                                                                data-target="#changeVideoNameModal"
+                                                                                data-id="{{this._id}}"
+                                                                                data-name="{{this.name}}"><i
+                                                                                class="fas fa-pen"></i></button>
+
+                                                                        <button class="rbtn" value="remove_video"
+                                                                                type="button" data-toggle="modal"
+                                                                                data-target="#rmVideoModal"
+                                                                                data-id="{{this._id}}"><i
+                                                                                class="fa fa-trash"></i></button>
+
+                                                                    </div>
+                                                                {{/each}}
+                                                            {{/with}}
+                                                            <button class="rbtn" type="button" data-toggle="modal"
+                                                                    data-target="#addVideoModal"
+                                                                    data-whatever="{{this._id}}"
+                                                                    data-name="{{this.name}}"><i
+                                                                    class="fas fa-plus"></i></button>
+
+
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    <button class="rbtn mb-2" type="button" data-toggle="modal"
+                                                            data-target="#changeSessionNameModal" data-id="{{this._id}}"
+                                                            data-name="{{this.name}}"><i
+                                                            class="fas fa-pen"></i></button>
+
+                                                    <button class="rbtn mb-2" value="remove_session" type="button"
+                                                            data-toggle="modal" data-target="#rmSessionModal"
+                                                            data-id="{{this._id}}"><i class="fa fa-trash"></i></button>
+
+
+                                                </td>
+                                            </tr>
+                                        {{/each}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div style="text-align: right;">
+                                    <button class="btn" id="addSessionBtn" data-toggle="modal"
+                                            data-target="#addSessionModal"><i class="fa fa-plus mr-2 "></i>Add new
+                                        session</a></button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side Bar Start -->
+
+            <!-- Side Bar End -->
+        </div>
+    </div>
+</div>
+<!-- Product Detail End -->
+
+<!-- Brand Start -->
+<div class="brand">
+    <div class="container-fluid">
+        <div class="brand-slider">
+            <div class="brand-item"><img src="/img/brand-1.png" alt=""></div>
+            <div class="brand-item"><img src="/img/brand-2.png" alt=""></div>
+            <div class="brand-item"><img src="/img/brand-3.png" alt=""></div>
+            <div class="brand-item"><img src="/img/brand-4.png" alt=""></div>
+            <div class="brand-item"><img src="/img/brand-5.png" alt=""></div>
+            <div class="brand-item"><img src="/img/brand-6.png" alt=""></div>
+        </div>
+    </div>
+</div>
+<!-- Brand End -->
+
+{{>Footer}}
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="/lib/easing/easing.min.js"></script>
+<script src="/lib/slick/slick.min.js"></script>
+
+<script src="https://cdn.tiny.cloud/1/ezd73nxbzc7bu6e86g2l82jbbffke0mwevwrnyvc5q8h89j6/tinymce/5/tinymce.min.js"
+        referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#txtDesc',
+        plugins: 'paste image link autolink lists table media autoresize',
+        menubar: true,
+        toolbar: [
+            'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
+        ],
+        max_height: "500",
+        max_width: "800",
+    });
+</script>
+<!-- Template Javascript -->
+<script src="/js/main.js"></script>
+<script>
+
+    var editor = $('.editor');
+    var editbtn = $('.btn-edit-desc');
+    var savebtn = $('.btn-outline-success');
+    var description = $('.desc-container');
+    var cancelDescBtn = $('#cancelDescBtn');
+    $('#txtDesc').html(description.html());
+
+
+    editbtn.click(function () {
+        $('#txtDesc').html(description.html());
+        description.css("display", "none");
+        editbtn.css("display", "none");
+        editor.css("display", "flex");
+    })
+    cancelDescBtn.click(function () {
+        description.css("display", "block");
+        editbtn.css("display", "flex");
+        editor.css("display", "none");
+    })
+
+    var editDetailBtn = $('.btn-edit-detail');
+    var detailCancelBtn = $('#detailCancelBtn');
+    editDetailBtn.click(function () {
+        $('#courseNameInput').val($('#courseName').text());
+        $('#briefDescriptionInput').val($('#briefDescription').text());
+        $('#priceInput').val(parseInt($('#price').text()));
+
+        $('#content').css("display", "none");
+        $('#coursedetail').css("display", "block");
+        if ($('#status').text().trim() === "Incompleted")
+            $('#statusInput').val("Incompleted");
+        else $('#statusInput').val("Completed");
+    })
+    detailCancelBtn.click(function () {
+        $('#content').css("display", "block");
+        $('#coursedetail').css("display", "none");
+    })
+    $('#renderVideoModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var link = button.data('whatever') // Extract info from data-* attributes
+
+        var modal = $(this)
+        modal.find('iframe').attr('src', link);
+    })
+    $("#renderVideoModal").on('hidden.bs.modal', function (e) {
+        $("#renderVideoModal iframe").attr("src", $("#renderVideoModal iframe").attr("src"));
+    });
+    $('#addVideoModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var chapterid = button.data('whatever') // Extract info from data-* attributes
+        var chaptername = button.data('name')
+        var modal = $(this)
+        modal.find('#ChapterIdInput').val(chapterid);
+        modal.find('#sessionHeader').text(chaptername);
+    })
+    $('#changeSessionNameModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var chapterid = button.data('id') // Extract info from data-* attributes
+        var chaptername = button.data('name')
+        var modal = $(this)
+
+        modal.find('#ChapterIdInput2').val(chapterid);
+        modal.find('#changeSessionNameInput').val(chaptername);
+    })
+    $('#rmSessionModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var cateid = button.data('id');
+        var modal = $(this)
+
+        modal.find('#rmSessionIdInput').val(cateid);
+    })
+    $('#changeVideoNameModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var videoid = button.data('id')
+        var videoname = button.data('name')
+        var modal = $(this)
+
+        modal.find('#VideoIdInput').val(videoid);
+        modal.find('#changeVideoNameInput').val(videoname);
+    })
+    $('#rmVideoModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var videoid = button.data('id');
+        var modal = $(this)
+
+        modal.find('#rmVideoIdInput').val(videoid);
+    })
+
+    function changeVid(url) {
+
+        var modal = $('#renderVideoModal')
+        modal.find('iframe').first().attr('src', url);
+    }
+</script>
+</body>
+
+</html>

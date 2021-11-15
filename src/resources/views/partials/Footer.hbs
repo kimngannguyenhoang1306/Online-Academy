@@ -1,0 +1,131 @@
+<!-- Footer Start -->
+<div class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-widget">
+                    <h2>Get in Touch</h2>
+                    <div class="contact-info">
+                        <p><i class="fa fa-map-marker"></i>227 Nguyen Van Cu Street, District 5, HCM City, Vietnam</p>
+                        <p><i class="fa fa-envelope"></i>hcmus@edu.vn</p>
+                        <p><i class="fa fa-phone"></i>+84-028-6288-4499</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-widget">
+                    <h2>Follow Us</h2>
+                    <div class="contact-info">
+                        <div class="social">
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                            <a href=""><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{#if role}}
+                {{#ifEquals role "Student"}}
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Courses Info</h2>
+                            <ul>
+                                <li><a href="#">Register course</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Purchase Info</h2>
+                            <ul>
+                                <li><a href="#">Courses Owned</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                {{/ifEquals}}
+                {{#ifEquals role "Teacher"}}
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Courses Info</h2>
+                            <ul>
+                                <li><a href="/teacher/courses-management">Courses Management</a></li>
+                                <li><a href="/teacher/add-course">Add Course</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Info</h2>
+                            <ul>
+                                <li><a href="/profile">Profile</a></li>
+                                <li><a href="/logout">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                {{/ifEquals}}
+                {{#ifEquals role "Administrator"}}
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Basic Management</h2>
+                            <ul>
+                                <li><a href="/admin/courses-management">Courses Management</a></li>
+                                <li><a href="/admin/users-management">User Management</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-widget">
+                            <h2>Info</h2>
+                            <ul>
+                                <li><a href="/profile">Profile</a></li>
+                                <li><a href="/logout">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                {{/ifEquals}}
+            {{else}}
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h2>Courses Info</h2>
+                        <ul>
+                            <li><a href="#">Register course</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget">
+                        <h2>Purchase Info</h2>
+                        <ul>
+                            <li><a href="#">Courses Owned</a></li>
+                        </ul>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+
+
+    </div>
+</div>
+<!-- Footer End -->
+
+<!-- Footer Bottom Start -->
+<div class="footer-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 copyright">
+                <p>Copyright &copy; <a href="https://htmlcodex.com">HTML Codex</a>. All Rights Reserved</p>
+            </div>
+
+            <div class="col-md-6 template-by">
+                <p>Template By <a href="https://htmlcodex.com">HTML Codex</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer Bottom End -->
+
+<!-- Back to Top -->
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>

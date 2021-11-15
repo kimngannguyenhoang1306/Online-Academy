@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>E Store - eCommerce HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="eCommerce HTML Template Free Download" name="keywords">
+    <meta content="eCommerce HTML Template Free Download" name="description">
+
+
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/lib/slick/slick.css" rel="stylesheet">
+    <link href="/lib/slick/slick-theme.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    {{>Header}}
+
+    {{!-- <!-- Breadcrumb Start -->
+    <div class="breadcrumb-wrap">
+        <div class="container-fluid">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">Category Management</li>
+            </ul>
+        </div>
+    </div>
+    <!-- Breadcrumb End --> --}}
+
+    <!-- Modal Start -->
+ 
+        <div class="modal fade" id="addCateModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="addCateForm" method="POST" action="">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add new category</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="CategoryName">Category name</label>
+                            <input type="text" class="form-control" id="CategoryNameInput" name="CategoryNameInput"
+                                placeholder="Enter category's name" required>
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-success" name="action" value="add_category" type="submit"><i
+                                class="fa fa-check" aria-hidden="true"></i>
+                            Add</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-danger"
+                                aria-hidden="true"></i>Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editCateNameModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="editCateNameForm" method="POST" action="">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Change category name</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="CategoryName">New category name</label>
+                            <input type="text" class="form-control" id="newCategoryNameInput" name="newCategoryNameInput"
+                                placeholder="Enter category's name" required>
+                            <input type="text" class="form-control" id="editCateIdInput" name="CateIdInput"
+                                    value="" style="display:none" required>
+                            <input type="text" class="form-control" id="oldCategoryNameInput" name="oldCategoryNameInput"
+                                    value="" style="display:none" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-success" name="action" value="edit_category_name" type="submit"><i
+                                class="fa fa-check" aria-hidden="true"></i>
+                            Change</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-danger"
+                                aria-hidden="true"></i>Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="rmCateModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="rmCateForm" method="POST" action="">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Remove category dialog</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <h4>Confirm to remove this category permanently.</h4>
+                                <input type="text" class="form-control" id="CateIdRemoveInput" name="CateIdInput"
+                                    value="" style="display:none" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-success" name="action" value="remove_cate" type="submit"><i
+                                class="fa fa-check" aria-hidden="true"></i>
+                            Yes</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-danger"
+                                aria-hidden="true"></i>No</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="rmhasCourseCateModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="rmhasCourseCate" method="" action="">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Remove category dialog</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <h4>This category is containing the courses. Cannot remove it now!</h4>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-danger"
+                                aria-hidden="true"></i>Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal End -->
+
+    <!-- Category list Start -->
+    <div class="wishlist-page">
+        <div class="container-fluid">
+            <div class="wishlist-page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Category name</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="align-middle">
+                                    {{#each categories}}
+                                    <tr>
+                                        <td>{{this.name}}</td>
+                                        <td>
+                                            <button class="" id="editCateNameBtn" data-toggle="modal"
+                                                data-target="#editCateNameModal" data-id="{{this._id}}" data-name="{{this.name}}"><i class="fas fa-pen"></i></button>
+                                            <a href="/admin/course-list?categoryName={{this.name}}&score=-1"><button><i
+                                                        class="fas fa-eye"></i></button></a>
+                                            {{#if (arrayof ../hasCourses @index)}}
+                                            <button class="" id="rmhasCourseCateBtn" data-toggle="modal"
+                                                data-target="#rmhasCourseCateModal"> <i
+                                                    class="fa fa-trash"></i></button>
+                                            {{else}}
+                                            <button class="" id="rmCateBtn" data-toggle="modal"
+                                                data-target="#rmCateModal" data-id="{{this._id}}"><i
+                                                    class="fa fa-trash"></i></button>
+                                            {{/if}}
+                                        </td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="" align="right">
+                            <button class="btn" id="addCateBtn" data-toggle="modal" data-target="#addCateModal"><i
+                                    class="fa fa-plus mr-2"></i>Add new category</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Wishlist End -->
+
+    {{>Footer}}
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/easing/easing.min.js"></script>
+    <script src="/lib/slick/slick.min.js"></script>
+    <script>
+        $('#rmCateModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var cateid = button.data('id');
+            var modal = $(this)
+
+            modal.find('#CateIdRemoveInput').val(cateid);
+        })
+        $('#editCateNameModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var cateid = button.data('id');
+            var catename = button.data('name');
+            var modal = $(this)
+
+            modal.find('#editCateIdInput').val(cateid);
+            modal.find('#oldCategoryNameInput').val(catename);
+        })
+    </script>
+    <!-- Template Javascript -->
+    <script src="/js/main.js"></script>
+</body>
+
+</html>

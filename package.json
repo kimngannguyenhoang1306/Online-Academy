@@ -1,0 +1,47 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000w\u0000e\u0000b\u0000-\u0000o\u0000n\u0000l\u0000i\u0000n\u0000e\u0000-\u0000a\u0000c\u0000d\u0000e\u0000m\u0000y\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon -e .handlebars,.hbs,.js src/index.js",
+    "watch": "node-sass -w src/resources/scss/app.scss src/public/css/app.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/truongdinhtoan0310/web-online-acdemy.git"
+  },
+  "author": "truongdinhtoan0310",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/truongdinhtoan0310/web-online-acdemy/issues"
+  },
+  "homepage": "https://github.com/truongdinhtoan0310/web-online-acdemy#readme",
+  "devDependencies": {
+    "@sendgrid/mail": "^7.4.7",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-handlebars": "^5.3.4",
+    "express-session": "^1.17.2",
+    "hbs": "^4.1.2",
+    "mongodb": "^4.1.2",
+    "mongoose-extend-schema": "^1.0.0",
+    "node-sass": "^6.0.1",
+    "nodemon": "^2.0.13",
+    "os": "^0.1.2",
+    "passport": "^0.5.0",
+    "passport-local": "^1.0.0",
+    "prettier": "^2.4.1",
+    "validator": "^13.6.0"
+  },
+  "dependencies": {
+    "mongoosastic": "^4.0.2",
+    "mongoose": "^6.0.12"
+  }
+}

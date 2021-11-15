@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>E Store - eCommerce HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="eCommerce HTML Template Free Download" name="keywords">
+    <meta content="eCommerce HTML Template Free Download" name="description">
+
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/lib/slick/slick.css" rel="stylesheet">
+    <link href="/lib/slick/slick-theme.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+    <style>
+        #previewVideoName {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-weight: bold;
+            color: white;
+            width: 90%;
+            text-align: center;
+            background-color: #0000004f;
+        }
+    </style>
+
+</head>
+
+<body>
+{{>Header}}
+
+<!-- Breadcrumb Start -->
+<div class="breadcrumb-wrap">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active">Product Detail</li>
+        </ul>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="renderVideoModal" tabindex="-1" role="dialog" aria-labelledby="renderVideoModalTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-vid">
+            <div class="modal-header">
+                <h3 class="modal-title vid-header">Course : {{course.name}}</h3>
+                <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{#if (arrayof videolist 0)}}
+                    <div style="width: 100%;" class="vid-container">
+                        {{#with (arrayof videolist 0)}}
+                            <iframe width="100%" height="100%" src="{{this.videos.[0].url}}" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                        {{/with}}
+
+                    </div>
+                    <div class="mt-3">
+                        <div class="ls-vid-header"> List of videos :</div>
+                        {{#each chapters as |chapter ind|}}
+                            <div class="mt-3">
+                                <strong><a href="#" class="session session-vid" data-toggle="collapse"
+                                           data-target="#chapter_vid{{inc @index}}" aria-expanded="false"
+                                           aria-controls="collapseExample">Session {{inc
+                                        @index}}:
+                                    <span>{{chapter.name}}</span></a></strong>
+
+                                <div class="collapse" id="chapter_vid{{inc @index}}">
+                                    <!-- Add videos -->
+
+                                    {{#with (arrayof ../videolist @index)}}
+                                        {{#each this.videos}}
+                                            <div class="ml-3 mb-2 vid-div">
+                                                {{#if ../../../isRegistered}}
+                                                    <a class="vid-btn ml-3" type="button" data-url="{{this.url}}"
+                                                       onclick="changeVid('{{this.url}}')">{{this.name}}</a>
+                                                {{else}}
+                                                    {{#ifEquals @../index 0}}
+                                                        <a class="vid-btn ml-3" type="button" data-url="{{this.url}}"
+                                                           onclick="changeVid('{{this.url}}')">{{this.name}}</a>
+                                                    {{else}}
+                                                        <a class="vid-btn ml-3" type="button">{{this.name}} (Register to
+                                                            view this
+                                                            lecture)</a>
+                                                    {{/ifEquals}}
+                                                {{/if}}
+
+                                            </div>
+                                        {{/each}}
+                                    {{/with}}
+                                </div>
+                            </div>
+                        {{/each}}
+                    </div>
+                {{else}}
+                    <h3>No videos has been added yet!</h3>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Product Detail Start -->
+<div class="product-detail">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="product-detail-top">
+                    <div class="row align-items-center">
+                        <div class="col-md-5">
+                            <div class="product-slider-single normal-slider">
+                                <img src="{{course.avatar}}" alt="Product Image">
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="product-content">
+                                <div class="title">
+                                    <h2>{{course.name}} {{#if completed}}
+                                        <span
+                                                style="border: solid 2px !important; font-size: 12px; font-family: 'Open Sans', sans-serif"
+                                                class="rounded border-success text-success p-1">
+                                                Completed
+                                            </span>
+                                    {{else}}
+                                        <span
+                                                style="border: solid 2px !important; font-size: 12px; font-family: 'Open Sans', sans-serif"
+                                                class="rounded border-warning text-warning p-1">
+                                                Updating
+                                            </span>
+                                    {{/if}}
+                                    </h2>
+                                </div>
+                                <p class="font-weight-bold">{{course.category.name}}</p>
+                                <p>Last updated - {{course.date}}</p>
+                                <p>{{course.brief_description}}</p>
+
+                                <div>
+                                    <span class="font-weight-bold" style="color: #FF6F61">{{course.score}}</span>
+                                    <div class="ratting d-inline">
+                                        {{#each course.starArr}}
+                                            <i class="fa {{this}} " style="font-family: FontAwesome"></i>
+                                        {{/each}}
+
+                                    </div>
+                                    <span style="color: gray">({{course.number_of_reviewer}} ratings)</span>
+                                    <span class="font-weight-bold">{{course.number_of_student}} students</span>
+                                    {{#if course.isBestseller}} <span
+                                            style="border: solid 2px !important; font-size: 12px; font-family: 'Open Sans', sans-serif"
+                                            class="rounded border-warning text-warning p-1 mx-1 font-weight-bold">
+                                                Bestseller
+                                            </span>{{/if}}
+                                    {{#if course.isBestseller}} <span
+                                            style="border: solid 2px !important; font-size: 12px; font-family: 'Open Sans', sans-serif"
+                                            class="rounded border-success text-success p-1 mx-1 font-weight-bold">
+                                                New
+                                            </span>
+                                    {{/if}}
+                                </div>
+                                <div class="price">
+                                    <h4>Price:</h4>
+                                    <p>${{course.price}} </p>
+                                </div>
+
+                                <div class="d-flex">
+                                    <div class="">
+                                        {{#if isRegistered}}
+                                            <div class="btn mr-5 registered">
+                                                <i class="fa fa-shopping-bag mr-2"></i>Registered
+                                            </div>
+                                        {{else}}
+                                            <a class="btn mr-5" href="/register-course"><i
+                                                    class="fa fa-shopping-bag mr-2"></i>Register</a>
+
+                                        {{/if}}
+                                    </div>
+                                    <div class="">
+                                        {{#if isLiked}}
+                                            <a class="btn" href="/remove-watchlist"><i
+                                                    class="fa fa-plus mr-2"></i>Remove
+                                                from watch list</a>
+                                        {{else}}
+                                            <a class="btn" href="/add-watchlist"><i class="fa fa-plus mr-2"></i>Add to
+                                                watch list</a>
+                                        {{/if}}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row product-detail-bottom">
+                    <div class="col-lg-12">
+                        <ul class="nav nav-pills nav-justified">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="pill" href="#description">Description</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="pill" href="#teacherInfo">Lecturer information</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="pill" href="#reviews">Reviews ({{reviewList.length}})</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="description" class="container tab-pane active">
+                                <h4>Product description</h4>
+                                <p>
+                                    {{{course.full_description}}}
+                                </p>
+                            </div>
+                            <div id="teacherInfo" class="container tab-pane fade">
+                                <h4>Lecturer Infomation</h4>
+                                <div>
+                                    <p><span class="font-weight-bold">Name:</span> {{course.owner.name}}</p>
+                                    <p><span class="font-weight-bold">Phone number:</span>
+                                        {{course.owner.phoneNumber}}
+                                    </p>
+                                    <p><span class="font-weight-bold">Email:</span> {{course.owner.email}}</p>
+                                </div>
+                            </div>
+                            <div id="reviews" class="container tab-pane fade">
+                                {{#if isRegistered}}
+                                    {{#if isCommented}}
+                                        <div class="p-3 mb-2 bg-light text-dark">
+                                            <div style="font-weight: bold">YOUR REVIEW</div>
+                                            <div class="reviews-submitted">
+                                                <div class="reviewer">{{isCommented.owner.name}} - <span>{{date}}</span>
+                                                </div>
+                                                <div class="ratting">
+                                                    {{#each course.starArr}}
+                                                        <i class="fa {{this}}" style="font-family: FontAwesome"></i>
+                                                    {{/each}}
+                                                </div>
+                                                <p>
+                                                    {{isCommented.comment}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    {{else}}
+                                        <div class="reviews-submit">
+                                            <h4 style="font-weight: bold">Give your Review:</h4>
+                                            <div class="stars">
+                                                <label class="rate">
+                                                    <input type="radio" name="radio1" id="star1" value="star1">
+                                                    <div class="face"></div>
+                                                    <i class="far fa-star star one-star"></i>
+                                                </label>
+                                                <label class="rate">
+                                                    <input type="radio" name="radio1" id="star2" value="star2">
+                                                    <div class="face"></div>
+                                                    <i class="far fa-star star two-star"></i>
+                                                </label>
+                                                <label class="rate">
+                                                    <input type="radio" name="radio1" id="star3" value="star3">
+                                                    <div class="face"></div>
+                                                    <i class="far fa-star star three-star"></i>
+                                                </label>
+                                                <label class="rate">
+                                                    <input type="radio" name="radio1" id="star4" value="star4">
+                                                    <div class="face"></div>
+                                                    <i class="far fa-star star four-star"></i>
+                                                </label>
+                                                <label class="rate">
+                                                    <input type="radio" name="radio1" id="star5" value="star5">
+                                                    <div class="face"></div>
+                                                    <i class="far fa-star star five-star"></i>
+                                                </label>
+                                            </div>
+                                            <!--                                        </div>-->
+                                            <div class="row form">
+                                                <form action="/add-review" method="post">
+                                                    <div class="col-sm-12">
+                                                    <textarea placeholder="Review" name="review_content"
+                                                              required></textarea>
+                                                    </div>
+                                                    <input type="text" id="start-getter" name="num_star"
+                                                           style="display: none"/>
+                                                    <div class="col-sm-12">
+                                                        <button type="submit">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    {{/if}}
+                                {{else}}
+                                    <div style="font-weight: bold">BUY THIS COURSE TO REVIEW</div>
+                                {{/if}}
+                                <div style="font-weight: bold">OTHER REVIEWS</div>
+                                {{#each reviewList}}
+                                    <div class="reviews-submitted">
+                                        <div class="reviewer">{{this.owner.name}} - <span>{{this.date}}</span></div>
+                                        <div class="ratting">
+                                            {{#each this.Star}}
+                                                <i class="fa {{this}}"></i>
+                                            {{/each}}
+                                        </div>
+                                        <p>
+                                            {{this.comment}}
+                                        </p>
+                                    </div>
+                                {{/each}}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product">
+                    <div class="section-header">
+                        <h1>Related Products</h1>
+                    </div>
+
+                    <div class="row align-items-center product-slider product-slider-3">
+                        {{#each course.relatedCourses}}
+                            <div class="col-lg-12">
+                                {{>CourseItem}}
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side Bar Start -->
+            <div class="col-lg-4 sidebar">
+
+                <div class="sidebar-widget widget-slider">
+                    <div class="w-100 text-center">
+                        <h3 class="font-weight-bold" style="color: #FF6F61">Preview this course</h3>
+                    </div>
+                    <div class="sidebar-slider normal-slider">
+                        {{#each previewVideos}}
+                            <div class="product-item">
+                                <div class="product-image">
+                                    <p id="previewVideoName">{{this.name}}</p>
+                                    <a href="product-detail.hbs">
+                                        <img src="{{../course.avatar}}" alt="Product Image">
+                                    </a>
+                                    <div class="product-action">
+                                        <a href="#" data-toggle="modal" data-target="#renderVideoModal"
+                                           data-whatever="{{this.url}}">
+                                            <i class="fa fa-play"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+
+                <div class="sidebar-widget brands">
+                    {{#each chapters as |chapter ind|}}
+                        <h4 style="font-size: 1.2rem;"><a href="#" class="session" data-toggle="collapse"
+                                                          data-target="#chapter_{{inc @index}}" aria-expanded="false"
+                                                          aria-controls="collapseExample">Session {{inc
+                                @index}}:
+                            <span>{{chapter.name}}</span></a></h4>
+
+                        <div class="collapse" id="chapter_{{inc @index}}">
+                            <!-- Add videos -->
+
+                            {{#with (arrayof ../videolist @index)}}
+                                {{#each this.videos}}
+                                    {{#if ../../../isRegistered}}
+                                        <div class="mb-2">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#renderVideoModal"
+                                                    data-whatever="{{this.url}}">{{this.name}}</button>
+
+                                        </div>
+                                    {{else}}
+                                        {{#ifEquals @../index 0}}
+                                            <div class="mb-2">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#renderVideoModal"
+                                                        data-whatever="{{this.url}}">{{this.name}}</button>
+
+                                            </div>
+                                        {{/ifEquals}}
+                                    {{/if}}
+
+                                {{/each}}
+                            {{/with}}
+
+
+                        </div>
+                    {{/each}}
+
+
+                </div>
+            </div>
+            <!-- Side Bar End -->
+        </div>
+    </div>
+</div>
+<!-- Product Detail End -->
+
+<!-- Brand Start -->
+<div class="brand">
+    <div class="container-fluid">
+        <div class="brand-slider">
+            <div class="brand-item"><img src="/img/brand-1.png" alt=""></div>
+            <div class="brand-item"><img src="/img/brand-2.png" alt=""></div>
+            <div class="brand-item"><img src="/img/brand-3.png" alt=""></div>
+            <div class="brand-item"><img src="/img/brand-4.png" alt=""></div>
+            <div class="brand-item"><img src="/img/brand-5.png" alt=""></div>
+            <div class="brand-item"><img src="/img/brand-6.png" alt=""></div>
+        </div>
+    </div>
+</div>
+<!-- Brand End -->
+
+{{>Footer}}
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="/lib/easing/easing.min.js"></script>
+<script src="/lib/slick/slick.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="/js/main.js"></script>
+<script>
+    $('#renderVideoModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var link = button.data('whatever')
+
+        var modal = $(this)
+        modal.find('iframe').attr('src', link);
+    })
+    $(".slick-track").addClass("ml-0")
+    $("#renderVideoModal").on('hidden.bs.modal', function (e) {
+        $("#renderVideoModal iframe").attr("src", $("#renderVideoModal iframe").attr("src"));
+    });
+
+    function changeVid(url) {
+        var modal = $('#renderVideoModal')
+        modal.find('iframe').first().attr('src', url);
+    }
+</script>
+</body>
+
+</html>
