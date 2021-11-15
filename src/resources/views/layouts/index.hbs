@@ -11,7 +11,7 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Source+Code+Pro:700,900&display=swap"
-          rel="stylesheet">
+        rel="stylesheet">
 
     <!-- CSS Libraries -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -26,247 +26,74 @@
 </head>
 
 <body>
-{{>Header}}
-{{#if role}}
+    {{>Header}}
+    {{#if role}}
     {{#ifEquals role "Teacher"}}
-        <div class="featured-product product">
-            <div class="container-fluid">
-                <div class="section-header">
-                    <h1>Courses you are charging: {{course_owned}}</h1>
+    <div class="featured-product product">
+        <div class="container-fluid">
+            <div class="section-header">
+                <h1>Courses you are charging: {{course_owned}}</h1>
+            </div>
+            <div class="row align-items-center product-slider product-slider-4">
+                {{#each courses}}
+                {{#if this.isBlocked}}
+                {{else}}
+                <div class="col-lg-3">
+                    {{>CourseItem_teacher}}
                 </div>
-                <div class="row align-items-center product-slider product-slider-4">
-                    {{#each courses}}
-                        {{#if this.isBlocked}}
-                        {{else}}
-                            <div class="col-lg-3">
-                                {{>CourseItem_teacher}}
-                            </div>
-                        {{/if}}
-                    {{/each}}
-                    {{#each courses}}
-                        {{#if this.isBlocked}}
-                        {{else}}
-                            <div class="col-lg-3">
-                                {{>CourseItem_teacher}}
-                            </div>
-                        {{/if}}
-                    {{/each}}
+                {{/if}}
+                {{/each}}
+                {{#each courses}}
+                {{#if this.isBlocked}}
+                {{else}}
+                <div class="col-lg-3">
+                    {{>CourseItem_teacher}}
                 </div>
+                {{/if}}
+                {{/each}}
             </div>
         </div>
+    </div>
     {{/ifEquals}}
-    {{#ifEquals role "Administrator"}}
-        <div class="cart-page">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="cart-page-inner">
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead class="thead-dark" style="background-color: #FF6F61">
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Quantity</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="align-middle">
-                                    <tr>
-                                        <td>Courses</td>
-                                        <td>{{numCourse}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Students</td>
-                                        <td>{{numStudent}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Teachers</td>
-                                        <td>{{numTeacher}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Registers</td>
-                                        <td>{{numRegister}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Reviews</td>
-                                        <td>{{numReview}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    {{!-- {{#ifEquals role "Administrator"}} --}}
+    <div class="cart-page">
+        <div class="cart-page-inner">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-dark" style="background-color: #FF6F61">
+                        <tr>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        <tr>
+                            <td>Courses</td>
+                            <td>{{numCourse}}</td>
+                        </tr>
+                        <tr>
+                            <td>Students</td>
+                            <td>{{numStudent}}</td>
+                        </tr>
+                        <tr>
+                            <td>Teachers</td>
+                            <td>{{numTeacher}}</td>
+                        </tr>
+                        <tr>
+                            <td>Registers</td>
+                            <td>{{numRegister}}</td>
+                        </tr>
+                        <tr>
+                            <td>Reviews</td>
+                            <td>{{numReview}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-    {{/ifEquals}}
+    </div>
+    {{!-- {{/ifEquals}}
     {{#ifEquals role "Student"}}
-        <!-- Main Slider Start -->
-        <div class="header">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3 mb-0">
-                        <nav class="bg-light">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#featured-courses"><i class="fa fa-home"></i>Feature
-                                        Courses</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#most-view-course"><i class="fa fa-home"></i>Most View
-                                        Course</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#newest-course"><i class="fa fa-shopping-bag"></i>Newest
-                                        Courses</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#hot-categories"><i class="fa fa-plus-square"></i>Hot
-                                        Categories</a>
-                                </li>
-
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-md-9" id="featured-courses">
-                        <div class="header-slider normal-slider">
-                            {{#each featuredCourses}}
-                                {{#if this.isBlocked}}
-                                {{else}}
-                                    <div class="header-slider-item">
-                                        <div class="product-item row">
-
-                                            <div class="product-image col-5 pr-0">
-                                                <a href="/product-detail?id={{this._id}}">
-                                                <img src="{{this.avatar}}" alt="Product Image"/>
-                                                </a>
-                                            </div>
-                                            <div class="col-7 pl-0">
-                                                <div class="product-title"
-                                                     style="height: 60%; display: flex; flex-direction: column; justify-content: center">
-                                                    <a href="/product-detail?id={{this._id}}" style="text-align: left
-                                                    !important;">
-                                                    <p class="text-white m-0">{{this.name}} {{#if completed}}
-                                                        <span
-                                                                style="border: solid 2px !important; font-size: 12px; font-family: 'Open Sans', sans-serif"
-                                                                class="rounded border-success text-success p-1">
-                                                    Completed
-                                                </span>
-                                                    {{else}}
-                                                        <span
-                                                                style="border: solid 2px !important; font-size: 12px; font-family: 'Open Sans', sans-serif"
-                                                                class="rounded border-warning text-warning p-1">
-                                                    Updating
-                                                </span>
-                                                    {{/if}}
-                                                    </p>
-                                                    <p class="text-white m-0 mt-1">{{this.category.name}}</p>
-                                                    <p class="text-white m-0">{{this.owner.name}}</p>
-                                                    </a>
-
-                                                    <div style="text-align: left">
-                                            <span class="font-weight-bold text-white"
-                                                  style="color: #FF6F61">{{this.score}}</span>
-                                                        <div class="ratting d-inline">
-                                                            {{#each this.starArr}}
-                                                                <i class="fa {{this}}"
-                                                                   style="font-family: FontAwesome"></i>
-                                                            {{/each}}
-                                                        </div>
-                                                        <span class="text-white">({{this.number_of_reviewer}}) <span
-                                                                class="font-weight-bold">({{this.number_of_student}}
-                                                            students)</span></span>
-                                                    </div>
-                                                </div>
-                                                <div class="product-price" style="height: 40%">
-                                                    <h3><span>$</span>{{this.price}}</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {{/if}}
-                            {{/each}}
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Main Slider End -->
-
-        <!-- Brand Start -->
-        <div class="brand mt-4 mb-0">
-            <div class="container-fluid">
-                <div class="brand-slider">
-                    <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-2.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-3.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-4.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-5.png" alt=""></div>
-                    <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
-                </div>
-            </div>
-        </div>
-        <!-- Brand End -->
-
-
-        <!-- Featured Product Start -->
-        <div id="most-view-course" class="featured-product product">
-            <div class="container-fluid">
-                <div class="section-header">
-                    <h1>Most View Courses</h1>
-                </div>
-                <div class="row align-items-center product-slider product-slider-4">
-                    {{#each mostViewCourses}}
-                        {{#if this.isBlocked}}
-                        {{else}}
-                            <div class="col-lg-3">
-                                {{>CourseItem}}
-                            </div>
-                        {{/if}}
-                    {{/each}}
-                </div>
-            </div>
-        </div>
-        <!-- Featured Product End -->
-
-
-        <!-- Recent Product Start -->
-        <div class="recent-product product" id="newest-course">
-            <div class="container-fluid">
-                <div class="section-header">
-                    <h1>Newest Courses</h1>
-                </div>
-                <div class="row align-items-center product-slider product-slider-4">
-                    {{#each newestCourses}}
-                        {{#if this.isBlocked}}
-                        {{else}}
-                            <div class="col-lg-3">
-                                {{>CourseItem}}
-                            </div>
-                        {{/if}}
-                    {{/each}}
-                </div>
-            </div>
-        </div>
-        <!-- Recent Product End -->
-
-        <div class="recent-product product" id="hot-categories">
-            <div class="container-fluid">
-                <div class="section-header">
-                    <h1>Hot Categories</h1>
-                </div>
-                <div class="row align-items-center">
-                    {{#each categories}}
-                        {{>Category}}
-                    {{/each}}
-                </div>
-            </div>
-        </div>
-        </div>
-
-
-    {{/ifEquals}}
-{{else}}
     <!-- Main Slider Start -->
     <div class="header">
         <div class="container-fluid">
@@ -275,15 +102,15 @@
                     <nav class="bg-light">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#featured-courses"><i class="fa fa-plus-square"></i>Feature
+                                <a class="nav-link" href="#featured-courses"><i class="fa fa-home"></i>Feature
                                     Courses</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#most-view-course"><i class="fa fa-plus-square"></i>Most View
+                                <a class="nav-link" href="#most-view-course"><i class="fa fa-home"></i>Most View
                                     Course</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#newest-course"><i class="fa fa-plus-square"></i>Newest
+                                <a class="nav-link" href="#newest-course"><i class="fa fa-shopping-bag"></i>Newest
                                     Courses</a>
                             </li>
                             <li class="nav-item">
@@ -297,59 +124,59 @@
                 <div class="col-md-9" id="featured-courses">
                     <div class="header-slider normal-slider">
                         {{#each featuredCourses}}
-                            {{#if this.isBlocked}}
-                            {{else}}
-                                <div class="header-slider-item">
-                                    <div class="product-item row">
+                        {{#if this.isBlocked}}
+                        {{else}}
+                        <div class="header-slider-item">
+                            <div class="product-item row">
 
-                                        <div class="product-image col-5 pr-0">
-                                            <a href="/product-detail?id={{this._id}}">
-                                            <img src="{{this.avatar}}" alt="Product Image"/>
-                                            </a>
-                                        </div>
-                                        <div class="col-7 pl-0">
-                                            <div class="product-title"
-                                                 style="height: 60%; display: flex; flex-direction: column; justify-content: center">
-                                                <a href="/product-detail?id={{this._id}}" style="text-align: left
-                                                !important;">
-                                                <p class="text-white m-0">{{this.name}} {{#if completed}}
-                                                    <span
-                                                            style="border: solid 2px !important; font-size: 12px; font-family: 'Open Sans', sans-serif"
-                                                            class="rounded border-success text-success p-1">
+                                <div class="product-image col-5 pr-0">
+                                    <a href="/product-detail?id={{this._id}}">
+                                        <img src="{{this.avatar}}" alt="Product Image" />
+                                    </a>
+                                </div>
+                                <div class="col-7 pl-0">
+                                    <div class="product-title"
+                                        style="height: 60%; display: flex; flex-direction: column; justify-content: center">
+                                        <a href="/product-detail?id={{this._id}}" style="text-align: left
+                                                    !important;">
+                                            <p class="text-white m-0">{{this.name}} {{#if completed}}
+                                                <span
+                                                    style="border: solid 2px !important; font-size: 12px; font-family: 'Open Sans', sans-serif"
+                                                    class="rounded border-success text-success p-1">
                                                     Completed
                                                 </span>
                                                 {{else}}
-                                                    <span
-                                                            style="border: solid 2px !important; font-size: 12px; font-family: 'Open Sans', sans-serif"
-                                                            class="rounded border-warning text-warning p-1">
+                                                <span
+                                                    style="border: solid 2px !important; font-size: 12px; font-family: 'Open Sans', sans-serif"
+                                                    class="rounded border-warning text-warning p-1">
                                                     Updating
                                                 </span>
                                                 {{/if}}
-                                                </p>
-                                                <p class="text-white m-0 mt-1">{{this.category.name}}</p>
-                                                <p class="text-white m-0">{{this.owner.name}}</p>
-                                                </a>
+                                            </p>
+                                            <p class="text-white m-0 mt-1">{{this.category.name}}</p>
+                                            <p class="text-white m-0">{{this.owner.name}}</p>
+                                        </a>
 
-                                                <div style="text-align: left">
+                                        <div style="text-align: left">
                                             <span class="font-weight-bold text-white"
-                                                  style="color: #FF6F61">{{this.score}}</span>
-                                                    <div class="ratting d-inline">
-                                                        {{#each this.starArr}}
-                                                            <i class="fa {{this}}" style="font-family: FontAwesome"></i>
-                                                        {{/each}}
-                                                    </div>
-                                                    <span class="text-white">({{this.number_of_reviewer}}) <span
-                                                            class="font-weight-bold">({{this.number_of_student}}
-                                                        students)</span></span>
-                                                </div>
+                                                style="color: #FF6F61">{{this.score}}</span>
+                                            <div class="ratting d-inline">
+                                                {{#each this.starArr}}
+                                                <i class="fa {{this}}" style="font-family: FontAwesome"></i>
+                                                {{/each}}
                                             </div>
-                                            <div class="product-price" style="height: 40%">
-                                                <h3><span>$</span>{{this.price}}</h3>
-                                            </div>
+                                            <span class="text-white">({{this.number_of_reviewer}}) <span
+                                                    class="font-weight-bold">({{this.number_of_student}}
+                                                    students)</span></span>
                                         </div>
                                     </div>
+                                    <div class="product-price" style="height: 40%">
+                                        <h3><span>$</span>{{this.price}}</h3>
+                                    </div>
                                 </div>
-                            {{/if}}
+                            </div>
+                        </div>
+                        {{/if}}
                         {{/each}}
 
                     </div>
@@ -383,12 +210,12 @@
             </div>
             <div class="row align-items-center product-slider product-slider-4">
                 {{#each mostViewCourses}}
-                    {{#if this.isBlocked}}
-                    {{else}}
-                        <div class="col-lg-3">
-                            {{>CourseItem}}
-                        </div>
-                    {{/if}}
+                {{#if this.isBlocked}}
+                {{else}}
+                <div class="col-lg-3">
+                    {{>CourseItem}}
+                </div>
+                {{/if}}
                 {{/each}}
             </div>
         </div>
@@ -404,12 +231,12 @@
             </div>
             <div class="row align-items-center product-slider product-slider-4">
                 {{#each newestCourses}}
-                    {{#if this.isBlocked}}
-                    {{else}}
-                        <div class="col-lg-3">
-                            {{>CourseItem}}
-                        </div>
-                    {{/if}}
+                {{#if this.isBlocked}}
+                {{else}}
+                <div class="col-lg-3">
+                    {{>CourseItem}}
+                </div>
+                {{/if}}
                 {{/each}}
             </div>
         </div>
@@ -423,7 +250,7 @@
             </div>
             <div class="row align-items-center">
                 {{#each categories}}
-                    {{>Category}}
+                {{>Category}}
                 {{/each}}
             </div>
         </div>
@@ -431,19 +258,185 @@
     </div>
 
 
-{{/if}}
+    {{/ifEquals}}
+    {{else}}
+    <!-- Main Slider Start -->
+    <div class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 mb-0">
+                    <nav class="bg-light">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#featured-courses"><i class="fa fa-plus-square"></i>Feature
+                                    Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#most-view-course"><i class="fa fa-plus-square"></i>Most View
+                                    Course</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#newest-course"><i class="fa fa-plus-square"></i>Newest
+                                    Courses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#hot-categories"><i class="fa fa-plus-square"></i>Hot
+                                    Categories</a>
+                            </li>
 
-{{>Footer}}
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-9" id="featured-courses">
+                    <div class="header-slider normal-slider">
+                        {{#each featuredCourses}}
+                        {{#if this.isBlocked}}
+                        {{else}}
+                        <div class="header-slider-item">
+                            <div class="product-item row">
 
-<!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="lib/easing/easing.min.js"></script>
-<script src="lib/slick/slick.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
-<!-- Template Javascript -->
-<script src="js/main.js"></script>
-<script src="assets/script/script.js"></script>
+                                <div class="product-image col-5 pr-0">
+                                    <a href="/product-detail?id={{this._id}}">
+                                        <img src="{{this.avatar}}" alt="Product Image" />
+                                    </a>
+                                </div>
+                                <div class="col-7 pl-0">
+                                    <div class="product-title"
+                                        style="height: 60%; display: flex; flex-direction: column; justify-content: center">
+                                        <a href="/product-detail?id={{this._id}}" style="text-align: left
+                                                !important;">
+                                            <p class="text-white m-0">{{this.name}} {{#if completed}}
+                                                <span
+                                                    style="border: solid 2px !important; font-size: 12px; font-family: 'Open Sans', sans-serif"
+                                                    class="rounded border-success text-success p-1">
+                                                    Completed
+                                                </span>
+                                                {{else}}
+                                                <span
+                                                    style="border: solid 2px !important; font-size: 12px; font-family: 'Open Sans', sans-serif"
+                                                    class="rounded border-warning text-warning p-1">
+                                                    Updating
+                                                </span>
+                                                {{/if}}
+                                            </p>
+                                            <p class="text-white m-0 mt-1">{{this.category.name}}</p>
+                                            <p class="text-white m-0">{{this.owner.name}}</p>
+                                        </a>
+
+                                        <div style="text-align: left">
+                                            <span class="font-weight-bold text-white"
+                                                style="color: #FF6F61">{{this.score}}</span>
+                                            <div class="ratting d-inline">
+                                                {{#each this.starArr}}
+                                                <i class="fa {{this}}" style="font-family: FontAwesome"></i>
+                                                {{/each}}
+                                            </div>
+                                            <span class="text-white">({{this.number_of_reviewer}}) <span
+                                                    class="font-weight-bold">({{this.number_of_student}}
+                                                    students)</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="product-price" style="height: 40%">
+                                        <h3><span>$</span>{{this.price}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/if}}
+                        {{/each}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Slider End -->
+
+    <!-- Brand Start -->
+    <div class="brand mt-4 mb-0">
+        <div class="container-fluid">
+            <div class="brand-slider">
+                <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
+                <div class="brand-item"><img src="img/brand-2.png" alt=""></div>
+                <div class="brand-item"><img src="img/brand-3.png" alt=""></div>
+                <div class="brand-item"><img src="img/brand-4.png" alt=""></div>
+                <div class="brand-item"><img src="img/brand-5.png" alt=""></div>
+                <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
+            </div>
+        </div>
+    </div>
+    <!-- Brand End -->
+
+
+    <!-- Featured Product Start -->
+    <div id="most-view-course" class="featured-product product">
+        <div class="container-fluid">
+            <div class="section-header">
+                <h1>Most View Courses</h1>
+            </div>
+            <div class="row align-items-center product-slider product-slider-4">
+                {{#each mostViewCourses}}
+                {{#if this.isBlocked}}
+                {{else}}
+                <div class="col-lg-3">
+                    {{>CourseItem}}
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <!-- Featured Product End -->
+
+
+    <!-- Recent Product Start -->
+    <div class="recent-product product" id="newest-course">
+        <div class="container-fluid">
+            <div class="section-header">
+                <h1>Newest Courses</h1>
+            </div>
+            <div class="row align-items-center product-slider product-slider-4">
+                {{#each newestCourses}}
+                {{#if this.isBlocked}}
+                {{else}}
+                <div class="col-lg-3">
+                    {{>CourseItem}}
+                </div>
+                {{/if}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <!-- Recent Product End -->
+
+    <div class="recent-product product" id="hot-categories">
+        <div class="container-fluid">
+            <div class="section-header">
+                <h1>Hot Categories</h1>
+            </div>
+            <div class="row align-items-center">
+                {{#each categories}}
+                {{>Category}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    </div> --}}
+
+
+    {{/if}}
+
+    {{>Footer}}
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/slick/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script src="assets/script/script.js"></script>
 </body>
 
 </html>

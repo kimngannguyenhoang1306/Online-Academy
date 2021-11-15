@@ -321,19 +321,6 @@ h2 {
     margin: 0;
 }
 
-.navbar .menu-nav li a {
-    display: block;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    margin-left: 25px;
-    transition: color 0.3s ease;
-}
-
-.navbar .menu-nav li a:hover {
-    color: rgb(253, 166, 53);
-}
-
 .navbar.sticky .menu-nav li a:hover {
     color: #fff;
 }
@@ -1485,8 +1472,8 @@ h2 {
 /**********************************/
 
 .cart-page {
-    position: relative;
-    margin-top: 30px;
+    display: block;
+    margin-top: 10%;
 }
 
 .cart-page .cart-page-inner {

@@ -55,14 +55,14 @@ hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
 
-//route(app);
+route(app);
 
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`)
   })
 
-  app.get('/', (req, res) => {
+  // app.get('/', (req, res) => {
 
-    res.render('index');
+  //   res.render('index');
 
-  })
+  // })
