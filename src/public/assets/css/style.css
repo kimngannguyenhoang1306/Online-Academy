@@ -663,7 +663,7 @@ section .title::after {
     .menu-btn {
         display: block;
         z-index: 999;
-        margin-right: 50px;
+        margin-right: 5%;
     }
     .menu-btn i.active:before {
         content: "\f00d";
@@ -771,5 +771,11 @@ section .title::after {
         width: 35px;
         font-size: 23px;
         line-height: 38px;
+    }
+}
+
+@media (max-width: 360px) {
+    .navbar .logo{
+        max-width: 10%;
     }
 }
