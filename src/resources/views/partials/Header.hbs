@@ -63,30 +63,31 @@
 <!-- Nav Bar End -->
 {{#ifEquals role "Teacher"}}
 <div class="nav">
-    <div class="container-fluid p-0">
-        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="navbar-nav mr-auto">
-                    <a href="/" class="nav-item nav-link">Home</a>
-                    <a href="/teacher/courses-management" class="nav-item nav-link">Courses Management</a>
-                    <a href="/teacher/add-course" class="nav-item nav-link">Add course</a>
-                </div>
-                <div class="navbar-nav ml-auto">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{user.name}}</a>
-                        <div class="dropdown-menu">
-                            <a href="/profile" class="dropdown-item">Profile</a>
-                            <a href="/logout" class="dropdown-item">Logout</a>
-                        </div>
+    <nav class="navbar">
+        <div class="logo"><a href="#">Online<span> Academy</span></a></div>
+        <form class="search" action="/course-list" method="POST">
+            <input type="text" placeholder="Search by course name" name="searchValue">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        <ul class="menu-nav">
+            <li><a href="/" class="menu-btn">Home</a></li>
+            <li><a href="/teacher/courses-management" class="menu-btn">Courses Management</a></li>
+            <li><a href="/teacher/add-course" class="menu-btn">Add course</a></li>
+            <li>
+                <div class="nav-item dropdown">
+                    <a href="/profile" class="dropdown-toggle" id="dropdownMenuLink"
+                        data-toggle="dropdown">{{user.name}}</a>
+                    <div class="dropdown-menu">
+                        <a href="/profile" style="margin:0;" class="dropdown-item">Profile</a>
+                        <a href="/logout" style="margin:0" class="dropdown-item">Logout</a>
                     </div>
                 </div>
-            </div>
-        </nav>
-    </div>
+            </li>
+        </ul>
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
 </div>
 {{/ifEquals}}
 {{#ifEquals role "Administrator"}}
@@ -107,8 +108,8 @@
                     <a href="/profile" class="dropdown-toggle" id="dropdownMenuLink"
                         data-toggle="dropdown">{{user.name}}</a>
                     <div class="dropdown-menu">
-                        <a href="/profile" class="dropdown-item">Profile</a>
-                        <a href="/logout" class="dropdown-item">Logout</a>
+                        <a href="/profile" style="margin:0;" class="dropdown-item">Profile</a>
+                        <a href="/logout" style="margin:0" class="dropdown-item">Logout</a>
                     </div>
                 </div>
             </li>

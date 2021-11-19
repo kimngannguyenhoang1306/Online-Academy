@@ -846,7 +846,8 @@ h2 {
 /**********************************/
 
 .featured-product {
-    position: relative;
+    display: block;
+    margin-top: 10%;
     padding: 30px 0;
 }
 
@@ -1669,7 +1670,8 @@ h2 {
 /**********************************/
 
 .wishlist-page {
-    position: relative;
+    display: block;
+    margin-top: 10%;
     padding: 30px 0;
 }
 
