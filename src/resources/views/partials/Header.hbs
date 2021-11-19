@@ -89,8 +89,7 @@
     </div>
 </div>
 {{/ifEquals}}
-{{/if}}
-{{!-- {{#ifEquals role "Administrator"}} --}}
+{{#ifEquals role "Administrator"}}
 <div class="nav">
     <nav class="navbar">
         <div class="logo"><a href="#">Online<span> Academy</span></a></div>
@@ -119,7 +118,7 @@
         </div>
     </nav>
 </div>
-{{!-- {{/ifEquals}}
+{{/ifEquals}}
 {{else}}
 <!-- Nav Bar Start -->
 <nav class="navbar">
@@ -150,4 +149,5 @@
             <a href="#">See more</a>
         </div>
     </div>
-</section>--}}
+</section>
+{{/if}}
