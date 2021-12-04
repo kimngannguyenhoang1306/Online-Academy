@@ -21,6 +21,7 @@
 
     <!-- Template Stylesheet -->
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -52,8 +53,7 @@
                         <div class="mt-3">
                             <strong><a href="#" class="session session-vid" data-toggle="collapse"
                                        data-target="#chapter_vid{{inc @index}}" aria-expanded="false"
-                                       aria-controls="collapseExample">Session {{inc
-                                    @index}}:
+                                       aria-controls="collapseExample">Session {{inc @index}}:
                                 <span>{{chapter.name}}</span></a></strong>
 
                             <div class="collapse" id="chapter_vid{{inc @index}}">
@@ -250,7 +250,7 @@
         <div class="modal-content">
             <form id="rmVideoForm" method="POST" action="">
                 <div class="modal-header">
-                    <h5 class="modal-title">Remove video dialog</h5>
+                    <h5 class="modal-title">Remove video</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -258,7 +258,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <h4>Confirm to remove this video permanently.</h4>
-                        <input type="text" class="form-control" id="rmVideoIdInput" name="VideoIdInput"
+                        <input type="text" class="form-control" id="rmVideoIdInput" name="rmVideoIdInput"
                                style="display:none" required>
                     </div>
                 </div>
@@ -319,29 +319,29 @@
                                 </div>
                                 <form id="coursedetail" style="display: none;" method="POST" action="">
                                     <div class="form-group">
-                                        <label for="coursename">Image (URL)</label>
+                                        <label for="avatarInput">Image (URL)</label>
                                         <input type="url" class="form-control" id="avatarInput" name="avatarInput"
                                                aria-describedby="emailHelp" placeholder="Enter image URL">
                                     </div>
                                     <div class="form-group">
-                                        <label for="coursename">Course name</label>
+                                        <label for="courseNameInput">Course name</label>
                                         <input type="text" class="form-control" id="courseNameInput"
                                                name="courseNameInput" aria-describedby="emailHelp"
                                                placeholder="Enter course title" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="briefDescription">Brief description</label>
+                                        <label for="briefDescriptionInput">Brief description</label>
                                         <input type="text" class="form-control" id="briefDescriptionInput"
                                                name="briefDescriptionInput" placeholder="Enter brief description"
                                                required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="price">Price</label>
+                                        <label for="priceInput">Price</label>
                                         <input type="number" min="0" class="form-control" id="priceInput"
                                                name="priceInput" placeholder="Enter course price" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="status">Status</label>
+                                        <label for="statusInput">Status</label>
                                         <select class="form-control" id="statusInput" name="statusInput">
                                             <option value="Completed">Completed</option>
                                             <option value="Incompleted">Incompleted</option>
@@ -379,7 +379,7 @@
                                         <form method="POST" action="" name="desc" style="width: 100%;">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h4>WYSIWYG Editor</h4>
+                                                    <h4>Full description editor</h4>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="form-group">
@@ -560,6 +560,7 @@
 </script>
 <!-- Template Javascript -->
 <script src="/js/main.js"></script>
+<script src="/assets/script/script.js"></script>
 <script>
 
     var editor = $('.editor');
@@ -567,11 +568,9 @@
     var savebtn = $('.btn-outline-success');
     var description = $('.desc-container');
     var cancelDescBtn = $('#cancelDescBtn');
-    $('#txtDesc').html(description.html());
 
 
     editbtn.click(function () {
-        $('#txtDesc').html(description.html());
         description.css("display", "none");
         editbtn.css("display", "none");
         editor.css("display", "flex");

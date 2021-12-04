@@ -45,15 +45,15 @@ class AdminController{
         console.log(req.body);
         if (req.body.action == "remove_course"){
           console.log("Pass");
-          await Methods.DeleteCourse(req.body.courseIdInput);
+          await Methods.DeleteCourse(req.body.rmCourseIdInput);
         }
         else if (req.body.action == "block_course"){
-          const course = await Courses.findById(req.body.courseIdInput);
+          const course = await Courses.findById(req.body.blockCourseIdInput);
           course.isBlocked = true;
           await course.save();
         }
         else if (req.body.action == "unblock_course"){
-          const course = await Courses.findById(req.body.courseIdInput);
+          const course = await Courses.findById(req.body.unblockCourseIdInput);
           course.isBlocked = false;
           await course.save();
         }

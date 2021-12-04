@@ -21,7 +21,6 @@
 
     <!-- Template Stylesheet -->
     <link href="/css/style.css" rel="stylesheet">
-    <link href="/assets/css/style.css" rel="stylesheet">
 
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/css/fileinput.min.css">
@@ -46,19 +45,20 @@
     <link rel="stylesheet" type="text/css" href="/login/css/util.css">
     <link rel="stylesheet" type="text/css" href="/login/css/main.css">
     <!--===============================================================================================-->
+    <link href="/assets/css/style.css" rel="stylesheet">
     <style>
 .btn-file  {
-    color: #FF6F61;
+    color: rgb(253,166,53);
     background: #ffffff;
-    border: 1px solid #FF6F61;
+    border: 1px solid rgb(253,166,53);
 }
 .login100-form-btn {
-    background: #FF6F61;
+    background: rgb(253,166,53);
 }
 
 .btn:hover, .btn:active, .btn-file:focus {
     color: #ffffff;
-    background: #FF6F61;
+    background: rgb(253,166,53);
     box-shadow: none;
 }
 </style>
@@ -87,7 +87,7 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 <form class="login100-form validate-form flex-sb flex-w" method="POST" action="/teacher/add-course">
-                    <span class="login100-form-title p-b-53">
+                    <span class="login100-form-title" style="color:#ffffff">
                         Add new course
                     </span>
 

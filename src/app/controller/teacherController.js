@@ -124,7 +124,7 @@ class TeacherController {
           await Methods.AddVideo(req.body.ChapterIdInput, req.body.VideoNameInput, req.body.url);
         }
         else if(req.body.action=="remove_video"){
-          await Methods.DeleteVideo(req.body.VideoIdInput)
+          await Methods.DeleteVideo(req.body.rmVideoIdInput)
         }else if(req.body.action=="change_video_name"){
           const video = await Videos.findById(req.body.VideoIdInput)
           video.name = req.body.changeVideoNameInput

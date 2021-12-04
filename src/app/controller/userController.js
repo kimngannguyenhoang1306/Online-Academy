@@ -573,56 +573,56 @@ class UserController {
         const categories = await Category.find({});
         let option = "";
         let host = req.originalUrl;
-        if (req.query.sortPrice) {
-            host = host.split("?")[0] + "?";
-            let status = null;
-            req.query.sortPrice == "1"
-                ? ((status = 1), (option = "Ascending Price"))
-                : ((status = -1), (option = "Descending Price"));
-            let courses = await Methods.FetchCourseSortAs("price", status);
-            for (const e of courses) {
-                let index = courses.indexOf(e);
-                const teacher = await Methods.getCourseLecturer(e.id);
-                courses[index].owner = teacher;
-                const cate = await Methods.GetCateName(e.id);
-                courses[index].category = cate;
-                courses[index].starArr = Methods.GetStarArr(courses[index].score);
-            }
-            courses = Methods.GetPagination(courses);
+        // if (req.query.sortPrice) {
+        //     host = host.split("?")[0] + "?";
+        //     let status = null;
+        //     req.query.sortPrice == "1"
+        //         ? ((status = 1), (option = "Ascending Price"))
+        //         : ((status = -1), (option = "Descending Price"));
+        //     let courses = await Methods.FetchCourseSortAs("price", status);
+        //     for (const e of courses) {
+        //         let index = courses.indexOf(e);
+        //         const teacher = await Methods.getCourseLecturer(e.id);
+        //         courses[index].owner = teacher;
+        //         const cate = await Methods.GetCateName(e.id);
+        //         courses[index].category = cate;
+        //         courses[index].starArr = Methods.GetStarArr(courses[index].score);
+        //     }
+        //     courses = Methods.GetPagination(courses);
     
-            res.render("product-list", {
-                categories,
-                courses,
-                option,
-                host,
-                role: req.isAuthenticated() ? req.user.role : null,
-                user: req.isAuthenticated() ? req.user : null,
-            });
-        } else if (req.query.sortRate) {
-            host = host.split("?")[0] + "?";
-            let status = null;
-            req.query.sortRate == "1"
-                ? ((status = 1), (option = "Ascending Rate Score"))
-                : ((status = -1), (option = "Descending Rate Score"));
-            let courses = await Methods.FetchCourseSortAs("score", status);
-            for (const e of courses) {
-                let index = courses.indexOf(e);
-                const teacher = await Methods.getCourseLecturer(e.id);
-                courses[index].owner = teacher;
-                const cate = await Methods.GetCateName(e.id);
-                courses[index].category = cate;
-                courses[index].starArr = Methods.GetStarArr(courses[index].score);
-            }
-            courses = Methods.GetPagination(courses);
-            res.render("product-list", {
-                categories,
-                courses,
-                option,
-                host,
-                role: req.isAuthenticated() ? req.user.role : null,
-                user: req.isAuthenticated() ? req.user : null,
-            });
-        } else if (req.query.searchValue) {
+        //     res.render("product-list", {
+        //         categories,
+        //         courses,
+        //         option,
+        //         host,
+        //         role: req.isAuthenticated() ? req.user.role : null,
+        //         user: req.isAuthenticated() ? req.user : null,
+        //     });
+        // } else if (req.query.sortRate) {
+        //     host = host.split("?")[0] + "?";
+        //     let status = null;
+        //     req.query.sortRate == "1"
+        //         ? ((status = 1), (option = "Ascending Rate Score"))
+        //         : ((status = -1), (option = "Descending Rate Score"));
+        //     let courses = await Methods.FetchCourseSortAs("score", status);
+        //     for (const e of courses) {
+        //         let index = courses.indexOf(e);
+        //         const teacher = await Methods.getCourseLecturer(e.id);
+        //         courses[index].owner = teacher;
+        //         const cate = await Methods.GetCateName(e.id);
+        //         courses[index].category = cate;
+        //         courses[index].starArr = Methods.GetStarArr(courses[index].score);
+        //     }
+        //     courses = Methods.GetPagination(courses);
+        //     res.render("product-list", {
+        //         categories,
+        //         courses,
+        //         option,
+        //         host,
+        //         role: req.isAuthenticated() ? req.user.role : null,
+        //         user: req.isAuthenticated() ? req.user : null,
+        //     });
+        if (req.query.searchValue) {
             host = host.split("&")[0] + "&";
             var courses = await Methods.searchCourseFullText(req.query.searchValue);
             var attri = null;

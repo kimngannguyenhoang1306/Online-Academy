@@ -423,6 +423,7 @@ const GetStarArr = (score) => {
   
   const GetPagination = (courses) => {
     let listPageCourses = [];
+    
     let len = courses.length;
     let count = Math.floor(len / 4);
     for (let i = 0; i < count; i++)

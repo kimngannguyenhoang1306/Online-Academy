@@ -42,6 +42,7 @@ html {
     background: #555;
 }
 
+
 /* home section styling */
 
 #home {
@@ -198,8 +199,9 @@ h2 {
 
 .btn {
     color: rgb(253, 166, 53);
-    background: #ffffff;
+    background: #111;
     border: 1px solid rgb(253, 166, 53);
+    margin-top: 20px;
 }
 
 .btn:hover,
@@ -325,6 +327,7 @@ h2 {
     color: #fff;
 }
 
+
 /**********************************/
 
 
@@ -333,12 +336,12 @@ h2 {
 
 /**********************************/
 
- .search {
+.search {
     width: 250px;
     margin-left: auto;
 }
 
- .search input[type=text] {
+.search input[type=text] {
     width: 95%;
     height: 40px;
     padding-left: 2%;
@@ -348,7 +351,7 @@ h2 {
     border-radius: 4px;
 }
 
- .search button {
+.search button {
     width: 15%;
     height: 38px;
     top: 1px;
@@ -359,7 +362,7 @@ h2 {
     border-radius: 0 2px 2px 0;
 }
 
- .search button:hover {
+.search button:hover {
     background: rgb(253, 166, 53);
     color: #ffffff;
 }
@@ -369,16 +372,19 @@ h2 {
         max-width: 20%;
     }
 }
-@media (max-width: 600px) { 
+
+@media (max-width: 600px) {
     .search button {
         margin-left: -20%;
     }
 }
+
 @media (max-width: 500px) {
     .search {
         display: none;
     }
 }
+
 
 /**********************************/
 
@@ -1223,7 +1229,7 @@ h2 {
 }
 
 .product-detail .tab-content {
-    background: #ffffff;
+    background: #111;
     padding: 25px 15px 15px 15px;
 }
 
@@ -1480,7 +1486,7 @@ h2 {
 .cart-page .cart-page-inner {
     padding: 30px;
     margin-bottom: 30px;
-    background: #ffffff;
+    background: #111;
 }
 
 .cart-page .table {
@@ -1490,12 +1496,12 @@ h2 {
 }
 
 .cart-page .table .thead-dark th {
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Ubuntu', sans-serif;
     font-size: 18px;
     font-weight: 700;
-    color: #353535;
+    color: #fff;
     text-align: center;
-    background: transparent;
+    background: rgb(253, 166, 53);
     border-color: #dddddd;
     border-bottom: none;
     vertical-align: middle;
@@ -1504,6 +1510,7 @@ h2 {
 .cart-page .table td {
     font-size: 16px;
     vertical-align: middle;
+    color: #fff;
 }
 
 .cart-page .table .img {
@@ -1677,7 +1684,7 @@ h2 {
 
 .wishlist-page .wishlist-page-inner {
     padding: 30px;
-    background: #ffffff;
+    background: #111;
 }
 
 .wishlist-page .table {
@@ -1687,12 +1694,12 @@ h2 {
 }
 
 .wishlist-page .table .thead-dark th {
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Ubuntu', sans-serif;
     font-size: 18px;
     font-weight: 700;
-    color: #353535;
+    color: #fff;
     text-align: center;
-    background: transparent;
+    background: rgb(253, 166, 53);
     border-color: #dddddd;
     border-bottom: none;
     vertical-align: middle;
@@ -1701,6 +1708,7 @@ h2 {
 .wishlist-page .table td {
     font-size: 16px;
     vertical-align: middle;
+    color: #fff;
 }
 
 .wishlist-page .table .img {
