@@ -205,7 +205,7 @@ class UserController {
         try {
             if (req.body.o_password.length == 0) {
                 const user = req.user;
-                user.email = req.body.email;
+                user.email = req.user.email;
                 user.phoneNumber = req.body.phoneNumber;
                 user.name = req.body.name;
                 await user.save();
@@ -405,13 +405,10 @@ class UserController {
                     const isRegistered = await Methods.isRegistered(req.user.id, CourseID);
                     if (isCommented) {
                         isCommented.starArr = Methods.GetStarArr(isCommented.Star)
-                        console.log("isCommtented", isCommented)
+                        //console.log("isCommtented", isCommented)
                         const date = new Date(isCommented.createdAt).toLocaleDateString(undefined, options);
-                        let userStar = await Review.find({owner: req.user.id});
-                        userStar = Methods.GetStarArr(userStar)
                         res.render("product-detail", {
                             course,
-                            userStar,
                             reviewList,
                             isCommented,
                             date,
