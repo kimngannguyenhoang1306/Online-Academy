@@ -1,66 +1,35 @@
 {{#if role}}
 {{#ifEquals role "Student"}}
-<!-- Nav Bar Start -->
 <div class="nav">
-    <div class="container-fluid p-0">
-        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="navbar-nav mr-auto">
-                    <a href="/" class="nav-item nav-link">Home</a>
-                    <div class="nav-item dropdown">
-                        <a href="/course-list" class="nav-link dropdown-toggle" data-toggle="dropdown">Category</a>
-                        <div class="dropdown-menu">
-                            {{#each categories}}
-                            <a href="/course-list?categoryName={{this.name}}&score=-1"
-                                class="dropdown-item">{{this.name}}</a>
-                            {{/each}}
-                        </div>
-                    </div>
-                    <a href="/course-list?score=-1" class="nav-item nav-link">All Courses</a>
-                    <a href="/courses-registered" class="nav-item nav-link">Registered Courses</a>
-                    <a href="/watchlist" class="nav-item nav-link">Watchlist</a>
-                </div>
-                <div class="navbar-nav ml-auto">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{user.name}}</a>
-                        <div class="dropdown-menu">
-                            <a href="/profile" class="dropdown-item">Profile</a>
-                            <a href="/logout" class="dropdown-item">Logout</a>
-                        </div>
+    <nav class="navbar">
+        <div class="logo"><a href="#">Online<span> Academy</span></a></div>
+        <form class="search" action="/course-list" method="POST">
+            <input type="text" placeholder="Search by course name" name="searchValue">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        <ul class="menu-nav">
+            <li><a href="/" class="menu-btn">Home</a></li>
+            <li><a href="#hot_categories" class="menu-btn">Category</a></li>
+            <li><a href="/course-list?score=-1" class="menu-btn">All Courses</a></li>
+            <li><a href="/courses-registered" class="menu-btn">Registered Courses</a></li>
+            <li><a href="/watchlist" class="menu-btn">Watchlist</a></li>
+            <li>
+                <div class="nav-item dropdown">
+                    <a href="/profile" class="dropdown-toggle" id="dropdownMenuLink"
+                        data-toggle="dropdown">{{user.name}}</a>
+                    <div class="dropdown-menu">
+                        <a href="/profile" style="margin:0;" class="dropdown-item">Profile</a>
+                        <a href="/logout" style="margin:0" class="dropdown-item">Logout</a>
                     </div>
                 </div>
-            </div>
-        </nav>
-    </div>
-</div>
-<div class="bottom-bar">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="col-md-3">
-                <div class="logo">
-                    <a href="/">
-                        <img src="/img/logo.png" alt="Logo">
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="search">
-                    <form action="/course-list" method="POST">
-                        <input type="text" placeholder="Search by course name" name="searchValue">
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
-                </div>
-            </div>
-
+            </li>
+        </ul>
+        <div class="menu-btn">
+            <i class="fas fa-bars"></i>
         </div>
-    </div>
+    </nav>
 </div>
 {{/ifEquals}}
-<!-- Nav Bar End -->
 {{#ifEquals role "Teacher"}}
 <div class="nav">
     <nav class="navbar">
@@ -130,11 +99,11 @@
     </form>
     <ul class="menu-nav">
         <li><a href="/" class="menu-btn">Home</a></li>
-        <li><a href="#hot-categories" class="menu-btn">Category</a></li>
-        <li><a href="#/course-list?score=-1" class="menu-btn">All Courses</a></li>
-        <li><a href="#/register-course" class="menu-btn">Register</a></li>
-        <li><a href="#/watchlist" class="menu-btn">WatchList</a></li>
-        <li><a href="#/profile" class="menu-btn">User Account</a></li>
+        <li><a href="/#hot-categories" class="menu-btn">Category</a></li>
+        <li><a href="/course-list?score=-1" class="menu-btn">All Courses</a></li>
+        <li><a href="/register-course" class="menu-btn">Register</a></li>
+        <li><a href="/watchlist" class="menu-btn">WatchList</a></li>
+        <li><a href="/profile" class="menu-btn">User Account</a></li>
     </ul>
     <div class="menu-btn">
         <i class="fas fa-bars"></i>
@@ -147,7 +116,7 @@
             <div class="text-1">Hi, welcome to my</div>
             <div class="text-2">Online Academy</div>
             <div class="text-3">And we're <span class="typing"></span></div>
-            <a href="#">See more</a>
+            <a href=".footer">See more</a>
         </div>
     </div>
 </section>

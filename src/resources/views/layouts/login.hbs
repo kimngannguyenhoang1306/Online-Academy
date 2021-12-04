@@ -32,20 +32,11 @@
             <div class="logo"><a href="/">Online<span> Academy</span></a></div>
             <ul class="menu">
                 <li><a href="/" class="menu-btn">Home</a></li>
-                <li><div class="nav-item dropdown">
-                                <a href="/course-list" class="nav-link dropdown-toggle menu-btn"
-                                   data-toggle="dropdown">Category</a>
-                                <div class="dropdown-menu">
-                                    {{#each categories}}
-                                        <a href="/course-list?categoryName={{this.name}}&score=-1"
-                                        class="dropdown-item">{{this.name}}</a>
-                                    {{/each}}
-                                </div>
-                            </div></li>
-                <li><a href="#services" class="menu-btn">All Courses</a></li>
-                <li><a href="#skills" class="menu-btn">Register</a></li>
-                <li><a href="#teams" class="menu-btn">WatchList</a></li>
-                <li><a href="#contact" class="menu-btn">User Account</a></li>
+                <li><a href="/#hot-categories" class="menu-btn">Category</a></li>
+                <li><a href="/course-list?score=-1" class="menu-btn">All Courses</a></li>
+                <li><a href="/register-course" class="menu-btn">Register</a></li>
+                <li><a href="/watchlist" class="menu-btn">WatchList</a></li>
+                <li><a href="/profile" class="menu-btn">User Account</a></li>
             </ul>
             <div class="menu-btn">
                 <i class="fas fa-bars"></i>
@@ -53,7 +44,7 @@
         </div>
     </nav>
 
-    <div class="login">
+    <div class="login" style="min-height: 35rem;">
         <h1 class="title">Sign In</h1>
         <div class="container">
                 <div class="row">
