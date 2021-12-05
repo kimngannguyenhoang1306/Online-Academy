@@ -862,6 +862,20 @@ h2 {
     border: none;
     color: #222;
     background: rgb(253, 166, 53);
+    position: absolute;
+    top: 82%;
+    left: 65%;
+}
+
+@media (max-width: 1240px) {
+    .product-item .product-price .btn {
+        position: absolute;
+        top: 82%;
+        left: 52%;
+        padding: 5px;
+        font-size: 18px;
+        width: 40%;
+    }
 }
 
 .product-item:hover .product-price .btn,
