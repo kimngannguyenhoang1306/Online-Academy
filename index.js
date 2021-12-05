@@ -7,7 +7,7 @@ const express = require('express')
 const path = require('path');
 const hbs = require('hbs');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const cookieParser = require("cookie-parser")
 
 const flash = require("express-flash")
@@ -57,7 +57,7 @@ hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
 
 route(app);
 
-app.listen(process.env.PORT, () => {
+app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`)
   })
 
