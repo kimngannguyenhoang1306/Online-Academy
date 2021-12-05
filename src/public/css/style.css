@@ -774,6 +774,12 @@ h2 {
     transition: all .3s;
 }
 
+.recent-product .product-item .product-image img, #most-view-course .product-item .product-image img {
+    width: 320px;
+    height: 200px;
+    transition: all .3s;
+}
+
 .product-item:hover .product-image img {
     transform: scale(1.2);
 }
