@@ -161,7 +161,9 @@ section .title::after {
     color: #fff;
 }
 
-
+.navbar.sticky .menu-nav .dropdown-menu a:hover {
+    color: rgb(253, 166, 53);
+}
 /* menu-nav btn styling */
 
 .menu-btn {
