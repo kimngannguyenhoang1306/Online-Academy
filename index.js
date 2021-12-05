@@ -57,7 +57,7 @@ hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
 
 route(app);
 
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
     console.log(`App listening at http://localhost:${port}`)
   })
 

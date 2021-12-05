@@ -300,6 +300,10 @@ section .title::after {
     color: rgb(253, 166, 53);
 }
 
+.product-view .product-short .dropdown-menu { 
+    min-width: 60%;
+    z-index: 1;
+}
 
 /* about section styling */
 
@@ -413,6 +417,9 @@ section .title::after {
         color: #fff;
         background: #111;
         margin-bottom: 12px;
+    }
+    .product-view .product-short .dropdown-menu {
+        background: #fff;
     }
     .home .home-content .text-2 {
         font-size: 70px;
