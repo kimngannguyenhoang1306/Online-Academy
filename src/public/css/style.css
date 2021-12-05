@@ -774,10 +774,12 @@ h2 {
     transition: all .3s;
 }
 
-.recent-product .product-item .product-image img, #most-view-course .product-item .product-image img {
+.recent-product .product-item .product-image img,
+.featured-product .product-item .product-image img,
+.product-view .product-item .product-image img,
+#most-view-course .product-item .product-image img {
     width: 320px;
     height: 200px;
-    transition: all .3s;
 }
 
 .product-item:hover .product-image img {
