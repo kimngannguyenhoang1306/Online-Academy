@@ -2,7 +2,7 @@
 {{#ifEquals role "Student"}}
 <div class="nav">
     <nav class="navbar">
-        <div class="logo"><a href="#">Online<span> Academy</span></a></div>
+        <div class="logo"><a href="/">Online<span> Academy</span></a></div>
         <form class="search" action="/course-list" method="POST">
             <input type="text" placeholder="Search by course name" name="searchValue">
             <button type="submit"><i class="fa fa-search"></i></button>
@@ -33,7 +33,7 @@
 {{#ifEquals role "Teacher"}}
 <div class="nav">
     <nav class="navbar">
-        <div class="logo"><a href="#">Online<span> Academy</span></a></div>
+        <div class="logo"><a href="/">Online<span> Academy</span></a></div>
         <form class="search" action="/course-list" method="POST">
             <input type="text" placeholder="Search by course name" name="searchValue">
             <button type="submit"><i class="fa fa-search"></i></button>
@@ -62,7 +62,7 @@
 {{#ifEquals role "Administrator"}}
 <div class="nav">
     <nav class="navbar">
-        <div class="logo"><a href="#">Online<span> Academy</span></a></div>
+        <div class="logo"><a href="/">Online<span> Academy</span></a></div>
         <form class="search" action="/course-list" method="POST">
             <input type="text" placeholder="Search by course name" name="searchValue">
             <button type="submit"><i class="fa fa-search"></i></button>
@@ -92,7 +92,7 @@
 {{else}}
 <!-- Nav Bar Start -->
 <nav class="navbar">
-    <div class="logo"><a href="#">Online<span> Academy</span></a></div>
+    <div class="logo"><a href="/">Online<span> Academy</span></a></div>
     <form class="search" action="/course-list" method="POST">
         <input type="text" placeholder="Search by course name" name="searchValue">
         <button type="submit"><i class="fa fa-search"></i></button>
