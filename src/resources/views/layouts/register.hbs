@@ -22,7 +22,7 @@
 
     <!-- Template Stylesheet -->
     <link href="/css/style.css" rel="stylesheet">
-    <link href="/assets/css/style.css" rel="stylesheet">
+    
 
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/login/vendor/bootstrap/css/bootstrap.min.css">
@@ -44,8 +44,12 @@
     <link rel="stylesheet" type="text/css" href="/login/css/util.css">
     <link rel="stylesheet" type="text/css" href="/login/css/main.css">
     <!--===============================================================================================-->
-
-
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <style>
+        #home {
+            display: none;
+        }
+    </style>
 </head>
 
 
@@ -58,7 +62,7 @@
     <div class="container-login100">
         <div class="wrap-login100">
             <form class="login100-form validate-form flex-sb flex-w" method="POST" action="/register">
-                    <span class="login100-form-title p-b-53">
+                    <span class="login100-form-title" style="color: #fff;">
                         Sign Up
                     </span>
 

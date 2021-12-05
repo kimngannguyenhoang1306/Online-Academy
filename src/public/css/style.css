@@ -1941,7 +1941,9 @@ h2 {
 
 .my-account .tab-content {
     padding: 30px;
-    background: #ffffff;
+    background: #111;
+    color: #fff;
+    margin-top: 8rem;
 }
 
 .my-account .tab-content .table {

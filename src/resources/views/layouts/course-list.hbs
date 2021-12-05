@@ -26,7 +26,7 @@
     <style>
         a.active {
             background-color: black !important;
-            color: #FF6F61 !important;
+            color: rgb(253,166,53) !important;
         }
     </style>
 
@@ -35,22 +35,10 @@
 <body>
 {{>Header}}
 
-<!-- Breadcrumb Start -->
-<div class="breadcrumb-wrap">
-    <div class="container-fluid">
-        <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="/admin/categories-management">Category Management</a></li>
-            <li class="breadcrumb-item active">Course List</li>
-        </ul>
-    </div>
-</div>
-<!-- Breadcrumb End -->
-
 <!--Product List Start-->
 <div class="product-view">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" style="margin-top:8rem">
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-md-12 mb-4">
@@ -101,7 +89,7 @@
 
                                                         <div style="text-align: left">
                                                         <span class="font-weight-bold"
-                                                              style="color: #FF6F61">{{this.score}}</span>
+                                                              style="color: rgb(253,166,53)">{{this.score}}</span>
                                                             <div class="ratting d-inline">
                                                                 {{#each this.starArr}}
                                                                     <i class="fa {{this}}"></i>
@@ -113,7 +101,7 @@
                                                     </div>
                                                     <div class="product-price">
                                                         <h3><span>$</span>{{this.price}}</h3>
-                                                        <a class="btn" href=""><i class="fa fa-edit"></i>Edit</a>
+                                                        <a class="btn" href="/admin/view-course?id={{this._id}}"><i class="fa fa-edit"></i>Edit</a>
                                                     </div>
                                                 </div>
                                             </div>
