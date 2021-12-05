@@ -25,6 +25,7 @@ router.get('/register-course',Validate.CheckAuthenticated,userController.registe
 router.get('/watchlist',Validate.CheckAuthenticated,userController.getwatchList);
 router.get('/add-watchlist',Validate.CheckAuthenticated,userController.getAddWatchList);
 router.get('/courses-registered',Validate.CheckAuthenticated,userController.getCourseRegistered);
+router.post('/courses-registered',Validate.CheckAuthenticated,userController.postCourseRegistered);
 router.get('/remove-watchlist',Validate.CheckAuthenticated,userController.removeWatchList);
 router.get('/remove-watchlist/:id',Validate.CheckAuthenticated,userController.getRemoveWatchListByID);
 router.post('/add-review',Validate.CheckAuthenticated,userController.postAddView);

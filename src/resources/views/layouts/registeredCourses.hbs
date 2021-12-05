@@ -28,6 +28,36 @@
 <body>
 {{>Header}}
 
+<div class="modal fade" id="unregisterCourseModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="unregisterCourseForm" method="POST" action="">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Unregister this course</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <h4>Confirm to unregister this course.</h4>
+                            <input type="text" class="form-control" id="unregisterCourseIdInput" name="unregisterCourseIdInput"
+                                style="display:none" required>
+                            <input type="text" class="form-control" id="userUnregisterCourse" name="userUnregisterCourse"
+                                style="display:none" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-success" name="action" value="unregister_course" type="submit"><i
+                                class="fa fa-check" aria-hidden="true"></i>
+                            Yes</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-danger"
+                                aria-hidden="true"></i>No</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
 <!-- Cart Start -->
 <div class="cart-page">
     <div class="container-fluid">
@@ -41,6 +71,7 @@
                                 <th>Course Name</th>
                                 <th>Price</th>
                                 <th>Lecturer</th>
+                                <th>&nbsp;</th>
                             </tr>
                             </thead>
                             <tbody class="align-middle">
@@ -64,6 +95,11 @@
                                     <td>{{this.price}}$</td>
                                     <td>
                                         {{this.owner.name}}
+                                    </td>
+                                    <td>
+                                        <button value="remove_course" class="mb-2" type="button" data-toggle="modal"
+                                                data-target="#unregisterCourseModal" data-id="{{this._id}}" data-user="{{user._id}}"><i
+                                                    class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                             {{/if}}
@@ -90,6 +126,17 @@
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
 <script src="/assets/script/script.js"></script>
+<script>
+    $('#unregisterCourseModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var courseid = button.data('id');
+            var user = button.data('user');
+            var modal = $(this)
+
+            modal.find('#unregisterCourseIdInput').val(courseid);
+            modal.find('#userUnregisterCourse').val(user);
+        })
+</script>
 </body>
 
 </html>

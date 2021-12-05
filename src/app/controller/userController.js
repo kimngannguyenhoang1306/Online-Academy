@@ -521,6 +521,17 @@ class UserController {
         }
     }
 
+    ///Unregister course
+    async postCourseRegistered(req, res) {
+        console.log(req.body);
+        if (req.body.action == "unregister_course") {
+            const courseid = await Courses.findById(req.body.unregisterCourseIdInput);
+            const userid = await Student.findById(req.body.userUnregisterCourse)
+            UnregisteredCourse(userid, courseid);
+        }
+        return res.redirect("/courses-registered");
+      }
+
     ///GET REMOVE WATCH LIST
     async removeWatchList(req, res) {
         try {
